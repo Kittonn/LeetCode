@@ -13,5 +13,10 @@ bot = commands.Bot(command_prefix=';')
 async def on_ready():
     print(f'{bot.user} has connected to Discord!')
     await bot.change_presence(activity=discord.Game(name=";command | lnwtxn"))
-    
+
+@bot.event
+async def on_message(message):
+    if message.content.startswith(';ping'):
+        await message.channel.send('Hello')
+
 bot.run(TOKEN)
