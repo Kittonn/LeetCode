@@ -1,0 +1,37 @@
+@bot.event
+async def on_message(message):
+    if message.content.startswith(';dev'):
+        
+        
+    
+    elif message.content.startswith(';salim'):
+        
+        
+
+    elif message.content.startswith(';inspire'):
+        
+        
+        
+    elif message.content.startswith(';covid'):
+        
+        
+        
+    elif message.content.startswith(';command'):
+        
+        
+    
+    elif message.content.startswith(';tcas65'):
+        
+        
+        
+    elif message.content.startswith(';gatpat'):
+        
+        tcas65Embed = discord.Embed(title=':date: ปฏิทิน TCAS65')
+        tcas65Embed.set_image(url=url_tcas65)
+        tcas65Embed.set_footer(text='อ้างอิงข้อมูลจาก www.mytcas.com',icon_url=url_mytcas_img)
+        
+        await message.channel.send(embed=tcas65Embed)
+    #elif message.content.startswith(';saman'):
+    #    await message.channel.send(embed=)
+    #elif message.content.startswith(';schedule'):
+    #    await message.channel.send(embed=)
