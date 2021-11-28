@@ -19,11 +19,19 @@ async def on_ready():
 url_watasalim = 'https://watasalim.vercel.app/api/quotes/random'
 url_inspire = 'https://zenquotes.io/api/quotes'
 url_covid_thailand = "https://covid19.ddc.moph.go.th/api/Cases/today-cases-all"
+url_github = 'https://github.com/lnwtxn'
+url_facebook = 'https://web.facebook.com/Thunder2004/'
+url_ig = 'https://www.instagram.com/kitton._/'
 
 @bot.event
 async def on_message(message):
-    if message.content.startswith(';ping'):
-        await message.channel.send('Hello')
+    if message.content.startswith(';dev'):
+        devEmbed = discord.Embed(title=':computer: Developer Profile',
+                                 description= '**This Bot is Develop by : <@400087960428609536> **'+ 
+                            f'\n\n :envelope: **Contact Me** \n :link: My Github : {url_github}'+
+                            f'\n :link: My Facebook : {url_facebook} \n :link: My Instagram : {url_ig}')
+        
+        await message.channel.send(embed=devEmbed)
     
     elif message.content.startswith(';salim'):
         
@@ -73,5 +81,15 @@ async def on_message(message):
         await message.channel.send(embed=covidEmbed)
         
     elif message.content.startswith(';command'):
-        await message.channel.send('กำลังพัฒนา เร็วนี้จะเต็มระบบ!!!')
+        commandEmbed = discord.Embed(title=':file_folder: Command List',
+                                   description= '**:red_circle: Prefix : `;`**'+ 
+                            '\n\n**:school: Class Schedule** \n`;schedule` = `ดูตารางสอน online` \n`;friend ชื่อเล่น` = `ข้อมูลส่วนตัวของเพื่อน`'+ 
+                            '\n\n**:memo: TCAS65 Schudule**\n `;gatpat` = `ดูตารางสอบ Gat & Pat และดูเวลาเตรียมตัว` \n `;tcas ชื่อย่อของมหาวิทยาลัย` = `ดูข้อมูล Admission`'+ 
+                            '\n `;saman` = `ดูตารางสอบ 9 วิชาสามัญ และดูเวลาเตรียมตัว` \n `;tcas65` = `ดูปฏิทิน TCAS65`'+ 
+                            '\n\n **:speech_left: Message API** \n `;covid19 thailand` = `ดูรายงานโควิดประจำวัน`\n`;covid ชื่อจังหวัด` = `ดูรายงานโควิดประจำจังหวัด`'+
+                            ' \n `;inspire` = `ดูแรงบันดาลใจ`'+
+                            '\n`;watasalim` = `ดูวาทกรรมสลิ่ม` \n `;cheab` = `คำคมเฉียบๆ`'+
+                            '\n\n **:mag_right: About** \n `;dev` = `ข้อมูลผู้พัฒนา`')
+        
+        await message.channel.send(embed=commandEmbed)
 bot.run(TOKEN)
