@@ -38,7 +38,8 @@ async def dev(message):
     devEmbed = discord.Embed(title=':computer: Developer Profile',
                                  description= '**This Bot is Develop by : <@400087960428609536> **'+ 
                             f'\n\n :envelope: **Contact Me** \n :link: My Github : {url_github}'+
-                            f'\n :link: My Facebook : {url_facebook} \n :link: My Instagram : {url_ig}')
+                            f'\n :link: My Facebook : {url_facebook} \n :link: My Instagram : {url_ig}',
+                            color =0x001524)
         
     await message.send(embed=devEmbed)
 
@@ -50,7 +51,8 @@ async def watasalim(message):
     wata = data['quote']['body']
     
     wataEmbed = discord.Embed(title=':speech_balloon: วาทกรรมสลิ่ม',
-                              description = f"**{wata}**")
+                              description = f"**{wata}**",
+                              color =0x001524)
     
     await message.send(embed=wataEmbed)
 
@@ -64,42 +66,45 @@ async def inspire(message):
     name = data[0]['a']
     
     inspireEmbed = discord.Embed(title=':speech_balloon: Inspirational Quotes',
-                                description = f'**{quote}**\n{name}')
+                                description = f'**{quote}**\n{name}',
+                                color =0x001524)
     
     await message.channel.send(embed=inspireEmbed)
 
-@bot.command()
-async def covid(message, thailand):
-    
-    res = requests.get(url_covid_thailand)
-    data = res.json()
-    
-    txn_date = data[0]['txn_date']
-    update_date = data[0]['update_date']
-    new_case = data[0]['new_case']
-    total_case = data[0]['total_case']
-    new_death = data[0]['new_death']
-    total_death = data[0]['total_death']
-    new_recovered = data[0]['new_recovered']
-    total_recovered = data[0]['total_recovered']
-    
-    covidEmbed = discord.Embed(title = f':microbe: รายงานยอดผู้ติดเชื้อประจำวันที่ {txn_date}',
-                               description=f'`อัพเดตข้อมูล ณ วันที่ {update_date}`')
-    
-    covidEmbed.add_field(name= 'ติดเชื้อเพิ่มวันนี้', value= f'{new_case}', inline= True)
-    covidEmbed.add_field(name= 'ติดเชื้อสะสมในประเทศ', value= f'{total_case}', inline= True)
-    covidEmbed.add_field(name= 'เสียชีวิตเพิ่ม', value= f'{new_death}', inline= True)
-    covidEmbed.add_field(name= 'เสียชีวิตรวม', value= f'{total_death}', inline= True)
-    covidEmbed.add_field(name= 'รักษาหาย', value= f'{new_recovered}', inline= True)
-    covidEmbed.add_field(name= 'รักษาหายรวม', value= f'{total_recovered}', inline= True)
-    covidEmbed.set_footer(text='อ้างอิงข้อมูลจาก กรมควบคุมโรค',icon_url=url_MOPH_img)
-    
-    await message.send(embed=covidEmbed)
+#@bot.command()
+#async def covid(message, thailand):
+#    
+#    res = requests.get(url_covid_thailand)
+#    data = res.json()
+#    
+#    txn_date = data[0]['txn_date']
+#    update_date = data[0]['update_date']
+#    new_case = data[0]['new_case']
+#    total_case = data[0]['total_case']
+#    new_death = data[0]['new_death']
+#    total_death = data[0]['total_death']
+#    new_recovered = data[0]['new_recovered']
+#    total_recovered = data[0]['total_recovered']
+#    
+#    covidEmbed = discord.Embed(title = f':microbe: รายงานยอดผู้ติดเชื้อประจำวันที่ {txn_date}',
+#                               description=f'`อัพเดตข้อมูล ณ วันที่ {update_date}`',
+#                               color =0x001524)
+#    
+#    covidEmbed.add_field(name= 'ติดเชื้อเพิ่มวันนี้', value= f'{new_case}', inline= True)
+#    covidEmbed.add_field(name= 'ติดเชื้อสะสมในประเทศ', value= f'{total_case}', inline= True)
+#    covidEmbed.add_field(name= 'เสียชีวิตเพิ่ม', value= f'{new_death}', inline= True)
+#    covidEmbed.add_field(name= 'เสียชีวิตรวม', value= f'{total_death}', inline= True)
+#    covidEmbed.add_field(name= 'รักษาหาย', value= f'{new_recovered}', inline= True)
+#    covidEmbed.add_field(name= 'รักษาหายรวม', value= f'{total_recovered}', inline= True)
+#    covidEmbed.set_footer(text='อ้างอิงข้อมูลจาก กรมควบคุมโรค',icon_url=url_MOPH_img)
+#    
+#    await message.send(embed=covidEmbed)
 
 @bot.command()
 async def command(message):
     
     commandEmbed = discord.Embed(title=':file_folder: Command List',
+                                 color =0x001524,
                                    description= '**:red_circle: Prefix : `;`**'+ 
                             '\n\n**:school: Class Schedule** \n`;schedule` = `ดูตารางสอน online` \n`;friend ชื่อเล่น` = `ข้อมูลส่วนตัวของเพื่อน`'+ 
                             '\n\n**:memo: TCAS65 Schudule**\n `;gatpat` = `ดูตารางสอบ Gat & Pat และดูเวลาเตรียมตัว` \n `;tcas ชื่อย่อของมหาวิทยาลัย` = `ดูข้อมูล Admission`'+ 
@@ -114,7 +119,8 @@ async def command(message):
 @bot.command()
 async def tcas65(message):
     
-    tcas65Embed = discord.Embed(title=':date: ปฏิทิน TCAS65')
+    tcas65Embed = discord.Embed(title=':date: ปฏิทิน TCAS65',
+                                color =0x001524)
     tcas65Embed.set_image(url=url_tcas65)
     tcas65Embed.set_footer(text='อ้างอิงข้อมูลจาก www.mytcas.com',icon_url=url_mytcas_img)
     
@@ -123,7 +129,8 @@ async def tcas65(message):
 @bot.command()
 async def gatpat(message):
     
-    gatpatEmbed = discord.Embed(title=':hourglass: ตารางสอบ Gat & Pat')
+    gatpatEmbed = discord.Embed(title=':hourglass: ตารางสอบ Gat & Pat',
+                                color =0x001524)
     gatpatEmbed.set_image(url=url_gatpat_img)
     gatpatEmbed.set_footer(text='อ้างอิงข้อมูลจาก www.mytcas.com',icon_url=url_mytcas_img)
     
@@ -132,7 +139,8 @@ async def gatpat(message):
 @bot.command()
 async def saman(message):
     
-    samanEmbed = discord.Embed(title=':hourglass: ตารางสอบ 9 วิชาสามัญ')
+    samanEmbed = discord.Embed(title=':hourglass: ตารางสอบ 9 วิชาสามัญ',
+                               color =0x001524)
     samanEmbed.set_image(url=url_9saman_img)
     samanEmbed.set_footer(text='อ้างอิงข้อมูลจาก www.mytcas.com',icon_url=url_mytcas_img)
     
@@ -141,7 +149,8 @@ async def saman(message):
 @bot.command()
 async def schedule(message):
     
-    scheduleEmbed = discord.Embed(title=':memo: ตารางสอน ชั้นมัธยมศึกษาปีที่ 6/3')
+    scheduleEmbed = discord.Embed(title=':memo: ตารางสอน ชั้นมัธยมศึกษาปีที่ 6/3',
+                                  color =0x001524)
     scheduleEmbed.set_image(url=url_schedule)
     scheduleEmbed.set_footer(text='อ้างอิงข้อมูลจาก ฝ่ายวิชาการโรงเรียนมารีวิทยากบินทร์บุรี')
     
@@ -159,7 +168,8 @@ async def friend(message, *, arg):
     img = data[f'{arg}']['url_img']
     
     friendEmbed = discord.Embed(title = ':bookmark_tabs: Friend Information',
-                                description = f'ชื่อ-นามสกุล : {name}\nชื่อเล่น : {nickname}\nInstagram : {ig}')
+                                description = f'ชื่อ-นามสกุล : {name}\nชื่อเล่น : {nickname}\nInstagram : {ig}',
+                                color =0x001524)
     friendEmbed.set_thumbnail(url=img)
     friendEmbed.set_footer(text='อ้างอิงข้อมูลจาก https://github.com/lnwtxn')
     
@@ -183,7 +193,8 @@ async def tcas(message, *, arg):
     name_upper = arg.upper()
     
     tcasEmbed = discord.Embed(title = f':school: TCAS65 {name_upper}',
-                                description = f'{name}\n{url}')
+                                description = f'{name}\n{url}',
+                                color =0x001524)
     tcasEmbed.set_image(url=img)
     tcasEmbed.set_footer(text=f'อ้างอิงข้อมูลจาก {name}')
     
