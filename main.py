@@ -23,6 +23,7 @@ url_friend = 'https://mvk19-section3-api.herokuapp.com/'
 url_tcas_university = 'https://api-tcas.herokuapp.com/'
 url_cheab_quote = 'https://cheab-quote.herokuapp.com'
 url_covid_province = 'https://covid19.ddc.moph.go.th/api/Cases/today-cases-by-provinces'
+url_covid_countryworld = 'https://coronavirus-19-api.herokuapp.com/countries'
 
 province_data = {"krabi": "0", "bangkok": "1", "kanchanaburi": "2","kalasin": "3","kamphaengphet": "4","khonkaen": "5","chanthaburi": "6","chachoengsao": "7",
                  "chonburi": "8","chainat": "9","chaiyaphum": "10","chumphon": "11","trang": "12","trat": "13","tak": "14","nakhonnayok": "15","nakhonpathom":"16",           
@@ -100,7 +101,7 @@ async def covid(message, *, arg):
         new_recovered = data[0]['new_recovered']
         total_recovered = data[0]['total_recovered']
 
-        covidEmbed = discord.Embed(title = f':microbe: รายงานยอดผู้ติดเชื้อประจำวันที่ {txn_date}',
+        covidEmbed = discord.Embed(title = f':microbe: รายงานยอดผู้ติดเชื้อประเทศไทย ประจำวันที่ {txn_date}',
                                    description=f'`อัพเดตข้อมูล ณ วันที่ {update_date}`',
                                    color =0x001524)
 
@@ -114,29 +115,54 @@ async def covid(message, *, arg):
 
         await message.send(embed=covidEmbed)
     else:
-        res = requests.get(url_covid_province)
-        data = res.json()
-        fetch = data[int(province_data[arg])]
         
-        txn_date = fetch['txn_date']
-        update_date = fetch['update_date']
-        new_case = fetch['new_case']
-        total_case = fetch['total_case']
-        new_death = fetch['new_death']
-        total_death = fetch['total_death']
-        pro = fetch['province']
-        
-        provinceEmbed = discord.Embed(title = f':microbe: รายงานยอดผู้ติดเชื้อ {pro} ประจำวันที่ {txn_date}',
-                                   description=f'`อัพเดตข้อมูล ณ วันที่ {update_date}`',
-                                   color =0x001524)
+        if(arg in province_data):
+            res = requests.get(url_covid_province)
+            data = res.json()
+            fetch = data[int(province_data[arg])]
 
-        provinceEmbed.add_field(name= 'ติดเชื้อเพิ่มวันนี้', value= f'{new_case}', inline= True)
-        provinceEmbed.add_field(name= 'ติดเชื้อสะสมในประเทศ', value= f'{total_case}', inline= True)
-        provinceEmbed.add_field(name= 'เสียชีวิตเพิ่ม', value= f'{new_death}', inline= True)
-        provinceEmbed.add_field(name= 'เสียชีวิตรวม', value= f'{total_death}', inline= True)
-        provinceEmbed.set_footer(text='อ้างอิงข้อมูลจาก กรมควบคุมโรค',icon_url=url_MOPH_img)
+            txn_date = fetch['txn_date']
+            update_date = fetch['update_date']
+            new_case = fetch['new_case']
+            total_case = fetch['total_case']
+            new_death = fetch['new_death']
+            total_death = fetch['total_death']
+            pro = fetch['province']
 
-        await message.send(embed=provinceEmbed)
+            provinceEmbed = discord.Embed(title = f':microbe: รายงานยอดผู้ติดเชื้อ จังหวัด{pro} ประจำวันที่ {txn_date}',
+                                       description=f'`อัพเดตข้อมูล ณ วันที่ {update_date}`',
+                                       color =0x001524)
+
+            provinceEmbed.add_field(name= 'ติดเชื้อเพิ่มวันนี้', value= f'{new_case}', inline= True)
+            provinceEmbed.add_field(name= 'ติดเชื้อสะสมในประเทศ', value= f'{total_case}', inline= True)
+            provinceEmbed.add_field(name= 'เสียชีวิตเพิ่ม', value= f'{new_death}', inline= True)
+            provinceEmbed.add_field(name= 'เสียชีวิตรวม', value= f'{total_death}', inline= True)
+            provinceEmbed.set_footer(text='อ้างอิงข้อมูลจาก กรมควบคุมโรค',icon_url=url_MOPH_img)
+
+            await message.send(embed=provinceEmbed)
+            
+        else:
+            x = arg
+            res = requests.get(url_covid_countryworld)
+            data = res.json()
+            
+            for i in range(len(data)):
+                if ((x[0].upper() + x[1:]) == data[i]['country']):
+                    country = data[i]['country']
+                    cases = data[i]['cases']
+                    deaths = data[i]['deaths']
+                    recovered = data[i]['recovered']
+            
+            worldEmbed = discord.Embed(title = f':microbe: รายงานยอดผู้ติดเชื้อ ประเทศ {country}',
+                                       color =0x001524)
+
+            worldEmbed.add_field(name= 'Cases', value= f'{cases}', inline= True)
+            worldEmbed.add_field(name= 'Deaths', value= f'{deaths}', inline= True)
+            worldEmbed.add_field(name= 'Recovered', value= f'{recovered}', inline= True)
+            worldEmbed.set_footer(text='อ้างอิงข้อมูลจาก https://disease.sh/')
+
+            await message.send(embed=worldEmbed)
+            
         
 @covid.error
 async def covid_error(message, error):
