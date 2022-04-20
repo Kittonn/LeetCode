@@ -134,7 +134,7 @@ async def covid(message, *, arg):
                                        color =0x001524)
 
             provinceEmbed.add_field(name= 'ติดเชื้อเพิ่มวันนี้', value= f'{new_case}', inline= True)
-            provinceEmbed.add_field(name= 'ติดเชื้อสะสมในจังหวัด', value= f'{total_case}', inline= True)
+            provinceEmbed.add_field(name= 'ติดเชื้อสะสมในประเทศ', value= f'{total_case}', inline= True)
             provinceEmbed.add_field(name= 'เสียชีวิตเพิ่ม', value= f'{new_death}', inline= True)
             provinceEmbed.add_field(name= 'เสียชีวิตรวม', value= f'{total_death}', inline= True)
             provinceEmbed.set_footer(text='อ้างอิงข้อมูลจาก กรมควบคุมโรค',icon_url=url_MOPH_img)
