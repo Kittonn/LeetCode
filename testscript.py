@@ -1,5 +1,5 @@
-import datetime
-today = datetime.date.today()
-someday = datetime.date(2022, 3, 12)
-diff = someday - today
-print(diff.days)
+import requests
+import random
+res = requests.get('https://covid19.ddc.moph.go.th/api/Cases/today-cases-all')
+
+print(res.json())

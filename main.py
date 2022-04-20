@@ -5,7 +5,6 @@ from discord.ext import commands
 import discord
 from dotenv import load_dotenv
 import random
-from datetime import date
 
 url_watasalim = 'https://watasalim.vercel.app/api/quotes/random'
 url_inspire = 'https://zenquotes.io/api/quotes'
@@ -130,13 +129,8 @@ async def tcas65(message):
 @bot.command()
 async def gatpat(message):
     
-    today = date.today()
-    future = date(2022,3,12)
-    diff = future - today
-    
     gatpatEmbed = discord.Embed(title=':hourglass: ตารางสอบ Gat & Pat',
-                                color =0x001524,
-                                description = f'====== **เหลือเวลาเตรียมตัวอีก {diff.days} วัน** ======')
+                                color =0x001524)
     gatpatEmbed.set_image(url=url_gatpat_img)
     gatpatEmbed.set_footer(text='อ้างอิงข้อมูลจาก www.mytcas.com',icon_url=url_mytcas_img)
     
@@ -145,13 +139,8 @@ async def gatpat(message):
 @bot.command()
 async def saman(message):
     
-    today = date.today()
-    future = date(2022,3,19)
-    diff = future - today
-    
     samanEmbed = discord.Embed(title=':hourglass: ตารางสอบ 9 วิชาสามัญ',
-                               color =0x001524,
-                               description = f'====== **เหลือเวลาเตรียมตัวอีก {diff.days} วัน** ======')
+                               color =0x001524)
     samanEmbed.set_image(url=url_9saman_img)
     samanEmbed.set_footer(text='อ้างอิงข้อมูลจาก www.mytcas.com',icon_url=url_mytcas_img)
     
