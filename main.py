@@ -22,18 +22,6 @@ url_schedule = 'https://media.discordapp.net/attachments/912032605845741578/9145
 url_friend = 'https://mvk19-section3-api.herokuapp.com/'
 url_tcas_university = 'https://api-tcas.herokuapp.com/'
 url_cheab_quote = 'https://cheab-quote.herokuapp.com'
-url_covid_province = 'https://covid19.ddc.moph.go.th/api/Cases/today-cases-by-provinces'
-
-province_data = {"krabi": "0", "bangkok": "1", "kanchanaburi": "2","kalasin": "3","kamphaengphet": "4","khonkaen": "5","chanthaburi": "6","chachoengsao": "7",
-                 "chonburi": "8","chainat": "9","chaiyaphum": "10","chumphon": "11","trang": "12","trat": "13","tak": "14","nakhonnayok": "15","nakhonpathom":"16",           
-                 "nakhonphanom":"17","nakhonratchasima":"18","nakhonsithammarat":"19","nakhonsawan":"20","nonthaburi":"21","narathiwat":"22","nan":"23","buengkan":"24",
-                 "buriram":"25","pathumthani":"26","prachuapkhirikhan":"27","prachinburi":"28","pattani":"29","ayutthaya":"30","phayao":"31","phangnga":"32","phatthalung":"33",
-                 "phichit":"34","phitsanulok":"35","phuket":"36","mahasarakham":"37","mukdahan":"38","yala":"39","yasothon":"40","roiet":"41","ranong":"42","rayong":"43",
-                 "ratchaburi":"44","lopburi":"45","lampang":"46","lamphun":"47","sisaket":"48","sakonnakhon":"49","songkhla":"50","satun":"51","samutprakan":"52",
-                 "samutsongkhram":"53","samutsakhon":"54","saraburi":"55","sakaew":"56","singburi":"57","suphanburi":"58","suratthani":"59","surin":"60","sukhothai":"61",
-                 "nongkhai":"62","nongbualamphu":"63","angthong":"64","amnatcharoen":"65","udonthani":"66","uttaradit":"67","uthaithani":"68","ubonratchathani":"69",
-                 "chiangrai":"70","chiangmai":"71","phetchaburi":"72","phetchabun":"73","loei":"74","phrae":"75","maehongson":"76"
-}
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -84,65 +72,35 @@ async def inspire(message):
     
     await message.channel.send(embed=inspireEmbed)
 
-@bot.command()
-async def covid(message, *, arg):
-    
-    if (arg == 'thailand'):
-        res = requests.get(url_covid_thailand)
-        data = res.json()
+#@bot.command()
+#async def covid(message, thailand):
+#    
+#    res = requests.get(url_covid_thailand)
+#    data = res.json()
+#    
+#    txn_date = data[0]['txn_date']
+#    update_date = data[0]['update_date']
+#    new_case = data[0]['new_case']
+#    total_case = data[0]['total_case']
+#    new_death = data[0]['new_death']
+#    total_death = data[0]['total_death']
+#    new_recovered = data[0]['new_recovered']
+#    total_recovered = data[0]['total_recovered']
+#    
+#    covidEmbed = discord.Embed(title = f':microbe: รายงานยอดผู้ติดเชื้อประจำวันที่ {txn_date}',
+#                               description=f'`อัพเดตข้อมูล ณ วันที่ {update_date}`',
+#                               color =0x001524)
+#    
+#    covidEmbed.add_field(name= 'ติดเชื้อเพิ่มวันนี้', value= f'{new_case}', inline= True)
+#    covidEmbed.add_field(name= 'ติดเชื้อสะสมในประเทศ', value= f'{total_case}', inline= True)
+#    covidEmbed.add_field(name= 'เสียชีวิตเพิ่ม', value= f'{new_death}', inline= True)
+#    covidEmbed.add_field(name= 'เสียชีวิตรวม', value= f'{total_death}', inline= True)
+#    covidEmbed.add_field(name= 'รักษาหาย', value= f'{new_recovered}', inline= True)
+#    covidEmbed.add_field(name= 'รักษาหายรวม', value= f'{total_recovered}', inline= True)
+#    covidEmbed.set_footer(text='อ้างอิงข้อมูลจาก กรมควบคุมโรค',icon_url=url_MOPH_img)
+#    
+#    await message.send(embed=covidEmbed)
 
-        txn_date = data[0]['txn_date']
-        update_date = data[0]['update_date']
-        new_case = data[0]['new_case']
-        total_case = data[0]['total_case']
-        new_death = data[0]['new_death']
-        total_death = data[0]['total_death']
-        new_recovered = data[0]['new_recovered']
-        total_recovered = data[0]['total_recovered']
-
-        covidEmbed = discord.Embed(title = f':microbe: รายงานยอดผู้ติดเชื้อประจำวันที่ {txn_date}',
-                                   description=f'`อัพเดตข้อมูล ณ วันที่ {update_date}`',
-                                   color =0x001524)
-
-        covidEmbed.add_field(name= 'ติดเชื้อเพิ่มวันนี้', value= f'{new_case}', inline= True)
-        covidEmbed.add_field(name= 'ติดเชื้อสะสมในประเทศ', value= f'{total_case}', inline= True)
-        covidEmbed.add_field(name= 'เสียชีวิตเพิ่ม', value= f'{new_death}', inline= True)
-        covidEmbed.add_field(name= 'เสียชีวิตรวม', value= f'{total_death}', inline= True)
-        covidEmbed.add_field(name= 'รักษาหาย', value= f'{new_recovered}', inline= True)
-        covidEmbed.add_field(name= 'รักษาหายรวม', value= f'{total_recovered}', inline= True)
-        covidEmbed.set_footer(text='อ้างอิงข้อมูลจาก กรมควบคุมโรค',icon_url=url_MOPH_img)
-
-        await message.send(embed=covidEmbed)
-    else:
-        res = requests.get(url_covid_province)
-        data = res.json()
-        fetch = data[int(province_data[arg])]
-        
-        txn_date = fetch['txn_date']
-        update_date = fetch['update_date']
-        new_case = fetch['new_case']
-        total_case = fetch['total_case']
-        new_death = fetch['new_death']
-        total_death = fetch['total_death']
-        pro = fetch['province']
-        
-        provinceEmbed = discord.Embed(title = f':microbe: รายงานยอดผู้ติดเชื้อ {pro} ประจำวันที่ {txn_date}',
-                                   description=f'`อัพเดตข้อมูล ณ วันที่ {update_date}`',
-                                   color =0x001524)
-
-        provinceEmbed.add_field(name= 'ติดเชื้อเพิ่มวันนี้', value= f'{new_case}', inline= True)
-        provinceEmbed.add_field(name= 'ติดเชื้อสะสมในประเทศ', value= f'{total_case}', inline= True)
-        provinceEmbed.add_field(name= 'เสียชีวิตเพิ่ม', value= f'{new_death}', inline= True)
-        provinceEmbed.add_field(name= 'เสียชีวิตรวม', value= f'{total_death}', inline= True)
-        provinceEmbed.set_footer(text='อ้างอิงข้อมูลจาก กรมควบคุมโรค',icon_url=url_MOPH_img)
-
-        await message.send(embed=provinceEmbed)
-        
-@covid.error
-async def covid_error(message, error):
-    if isinstance(error, commands.CommandError):
-        await message.reply('No data in API!!!')
-    
 @bot.command()
 async def command(message):
     
@@ -269,7 +227,5 @@ async def cheab(message):
     
     q = data['quote'][n]
     await message.reply(f'{q}')
-
-
     
 bot.run(TOKEN)
