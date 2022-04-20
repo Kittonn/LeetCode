@@ -123,7 +123,12 @@ async def tcas65(message):
 @bot.command()
 async def gatpat(message):
     
+<<<<<<< HEAD
     gatpatEmbed = discord.Embed(title=':hourglass: ตารางสอบ Gat & Pat')
+=======
+    gatpatEmbed = discord.Embed(title=':hourglass: ตารางสอบ Gat & Pat',
+                                color =0x001524)
+>>>>>>> parent of b2f1341 (update date in command gatpat and saman)
     gatpatEmbed.set_image(url=url_gatpat_img)
     gatpatEmbed.set_footer(text='อ้างอิงข้อมูลจาก www.mytcas.com',icon_url=url_mytcas_img)
     
@@ -132,7 +137,12 @@ async def gatpat(message):
 @bot.command()
 async def saman(message):
     
+<<<<<<< HEAD
     samanEmbed = discord.Embed(title=':hourglass: ตารางสอบ 9 วิชาสามัญ')
+=======
+    samanEmbed = discord.Embed(title=':hourglass: ตารางสอบ 9 วิชาสามัญ',
+                               color =0x001524)
+>>>>>>> parent of b2f1341 (update date in command gatpat and saman)
     samanEmbed.set_image(url=url_9saman_img)
     samanEmbed.set_footer(text='อ้างอิงข้อมูลจาก www.mytcas.com',icon_url=url_mytcas_img)
     
